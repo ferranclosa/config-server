@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        encrypt:
+          enable: false
+        git:
+          clone-on-start: true
+          uri: https://github.com/ferranclosa/closa-config.git
+          user: ferranclosa@gmail.com
+          password: f5588690a1dc8bfb1086312d7b497a419ec4e95e
+          pattern:
+            - "*/*dev*"
+            - "*/*prod*"
+          searchPaths: "a-*"
+
+encrypt:
+  key: T81SMustBeLOn9F0rF0rY0uT09etB0redt01nf1n1t
+server:
+  port: 8071
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    actuator:
+      enabled: true
+    web:
+      base-path: "/actuator"
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
